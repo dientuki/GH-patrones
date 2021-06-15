@@ -146,3 +146,7 @@ class Mensajes {
         pop()
     }
 }
+
+function rand(x,y) {
+  return Math.floor(Math.random() * y) + x;
+}
