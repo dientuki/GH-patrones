@@ -166,3 +166,80 @@ class NaveGrande extends NaveAbstracta{
     return objeto.chocarNaveGrande(this);
   }
 }
+
+class Equipo extends SujetoAbstracto {
+  constructor(naves, color){
+    super(0,0,null);
+    this.naves = naves;
+    this.color = color
+
+    /*
+    for (let i=0; i<this.naves.length; i++) {
+      this.naves[i].susbcribir()
+    }
+    */
+  }
+
+  dameVida() {
+    for (let i=0, j = this.naves.length; i<j; i++) {
+      if (this.naves[i].dameVida() <= 0) {
+        this.naves.splice(i,1);
+        i--;
+        j = this.naves.length;
+      }
+     }
+
+    return this.naves.length;
+  }
+
+  chocarNaveChica(objeto){
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].chocar(objeto);
+    }
+  }
+
+  chocarNaveGrande(objeto){
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].chocar(objeto);
+    }
+  } 
+
+  chocarNaveAngosta(objeto){
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].chocar(objeto);
+    }
+  }   
+  
+  rebotar(otro) {
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].rebotar(otro);
+    }
+  }  
+
+  chocar(otro) {
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].chocar(otro);
+    }
+  }
+
+  dibujar(otro) {
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].dibujar(otro);
+    }
+  };  
+
+  mover() {
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].mover(otro);
+    }
+  }
+
+  tick() {
+    push();
+    fill(this.color)
+    for(let i=0; i<this.naves.length; i++) {
+      this.naves[i].tick();
+    }
+    pop();
+  }
+}

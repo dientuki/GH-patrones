@@ -4,11 +4,24 @@ function setup() {
   createCanvas(CANVAS.x, CANVAS.y);
 
 
+  let naves1 = []
+  let naves2 = []
+
   for(let i = 0; i<8; i++) {
-    entidades.push(new NaveAngosta( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
-    entidades.push(new NaveChica( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
-    entidades.push(new NaveGrande( rand(10, CANVAS.x-20), rand(10, CANVAS.y-20)));
+    naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
+    naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
+    naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
+  
+  naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
+  naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
+  naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+
+  let equipo1 = new Equipo(naves1, 0);
+  let equipo2 = new Equipo(naves2, 255);
+
+  entidades.push(equipo1);
+  entidades.push(equipo2);  
 }
 
 
