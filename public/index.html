@@ -13,8 +13,13 @@
 
         <link href="bootstrap.min.css" rel="stylesheet">
 
+        <script src="p5.min.js"></script>
+        <script src="utils.js"></script>
+        <script src="abstract.js"></script>
+        <script src="classes.js"></script>
+
         <script>
-          const entidades=[];
+          const ENTIDADES=[];
           const CANVAS = {
             x: 400,
             y:400
@@ -24,13 +29,12 @@
             NaveGrande: 100,
             NaveChica: 25,
             NaveAngosta: 12.5
-          }          
-        </script>
+          }
 
-        <script src="p5.min.js"></script>
-        <script src="utils.js"></script>
-        <script src="abstract.js"></script>
-        <script src="classes.js"></script>
+          const MENSAJES = new Mensajes(300,100)
+        </script>        
+
+
         <script src="main.js"></script>
     </head>
     <body class="d-flex h-100 text-center text-white bg-dark">

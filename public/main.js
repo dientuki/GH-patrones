@@ -3,25 +3,24 @@
 function setup() {
   createCanvas(CANVAS.x, CANVAS.y);
 
-
-  let naves1 = []
-  let naves2 = []
+  const naves1 = []
+  const naves2 = []
 
   for(let i = 0; i<8; i++) {
     naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
     naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
     naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
-  
+
   naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
   naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
   naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
 
-  let equipo1 = new Equipo(naves1, 0);
-  let equipo2 = new Equipo(naves2, 255);
+  const equipo1 = new Equipo(naves1, 0);
+  const equipo2 = new Equipo(naves2, 255);
 
-  entidades.push(equipo1);
-  entidades.push(equipo2);  
+  ENTIDADES.push(equipo1);
+  ENTIDADES.push(equipo2);  
 }
 
 
@@ -30,24 +29,24 @@ function draw() {
     // volvemos a pintar todo lo que queramos
     background(220)
 
-    for(let i = 0, l1 = entidades.length; i<l1; i++) {
-      if (entidades[i].dameVida() <= 0) {
-        entidades.splice(i,1);
+    for(let i = 0, l1 = ENTIDADES.length; i<l1; i++) {
+      if (ENTIDADES[i].dameVida() <= 0) {
+        ENTIDADES.splice(i,1);
         i--;
-        l1 = entidades.length
+        l1 = ENTIDADES.length
       }
     }    
 
-    for(let i = 0, l1 = entidades.length; i<l1; i++) {
-      for(let j = i + 1, l2 = entidades.length; j<l2; j++) {
-        entidades[i].chocar(entidades[j]);
+    for(let i = 0, l1 = ENTIDADES.length; i<l1; i++) {
+      for(let j = i + 1, l2 = ENTIDADES.length; j<l2; j++) {
+        ENTIDADES[i].chocar(ENTIDADES[j]);
       }
     }
      
      
     //dibujar
-    for(let i = 0, l = entidades.length; i<l; i++) {
-      entidades[i].tick();
+    for(let i = 0, l = ENTIDADES.length; i<l; i++) {
+      ENTIDADES[i].tick();
     }
 
     /*
