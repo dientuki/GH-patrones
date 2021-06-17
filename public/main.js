@@ -20,7 +20,12 @@ function setup() {
   const equipo2 = new Equipo(naves2, 255);
 
   ENTIDADES.push(equipo1);
-  ENTIDADES.push(equipo2);  
+  ENTIDADES.push(equipo2);
+
+  console.log(MENSAJES)
+  
+  MENSAJES.agregar("Ya creamos todas las naves");
+  MENSAJES.agregar("Let fight!");
 }
 
 
@@ -48,6 +53,8 @@ function draw() {
     for(let i = 0, l = ENTIDADES.length; i<l; i++) {
       ENTIDADES[i].tick();
     }
+
+    MENSAJES.mostrar()
 
     /*
     textSize(12)
