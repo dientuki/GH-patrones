@@ -6,8 +6,8 @@ function setup() {
 
   for(let i = 0; i<8; i++) {
     entidades.push(new NaveAngosta( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
-    //entidades.push(new NaveChica( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
-  
+    entidades.push(new NaveChica( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
+    entidades.push(new NaveGrande( rand(10, CANVAS.x-20), rand(10, CANVAS.y-20)));
   }
 }
 
