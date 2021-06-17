@@ -1,7 +1,16 @@
 class SujetoAbstracto {
   constructor(x,y, movedor, arma) {
+    this.vida = 100;
     this.posicion = V(x,y);
   }
+
+  sacarVida(valor) {
+    this.vida = this.vida - valor
+  }
+
+  dameVida() {
+    return this.vida;
+  }  
 
   mover() {
     this.posicion.x += this.velocidad.x;

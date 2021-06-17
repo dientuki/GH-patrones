@@ -17,6 +17,13 @@ function draw() {
     // volvemos a pintar todo lo que queramos
     background(220)
 
+    for(let i = 0, l1 = entidades.length; i<l1; i++) {
+      if (entidades[i].dameVida() <= 0) {
+        entidades.splice(i,1);
+        i--;
+        l1 = entidades.length
+      }
+    }    
 
     for(let i = 0, l1 = entidades.length; i<l1; i++) {
       for(let j = i + 1, l2 = entidades.length; j<l2; j++) {
