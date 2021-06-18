@@ -2,10 +2,25 @@ class SujetoAbstracto {
   constructor(x,y, movedor, arma) {
     this.vida = 100;
     this.posicion = V(x,y);
+    this.eventos = [];
   }
 
+  susbcribir(evento) {
+    this.eventos.push(evento)
+  }
+  
+  desusbcribir(evento) {
+
+  }  
+
   sacarVida(valor) {
-    this.vida = this.vida - valor
+    this.vida = this.vida - valor;
+
+    if (this.vida <= 0){
+      for(let i = 0, j = this.eventos.length; i<j; i++) {
+        this.eventos[i].actualizar(this);
+      }
+    }
   }
 
   dameVida() {
@@ -55,4 +70,10 @@ class NaveAbstracta extends SujetoAbstracto {
   dibujar() {
     circle(this.posicion.x, this.posicion.y, this.diametro)
   }   
+}
+
+class Observador {
+  actualizar(objeto) {
+    throw new Error('no se implemento')
+  }
 }

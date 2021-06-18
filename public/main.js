@@ -5,6 +5,7 @@ function setup() {
 
   const naves1 = []
   const naves2 = []
+  const parca = new Parca(MENSAJES);
 
   for(let i = 0; i<8; i++) {
     naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
@@ -16,13 +17,18 @@ function setup() {
   naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
   naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
 
+  for(let i = 0, j = naves1.length; i<j; i++) {
+    naves1[i].susbcribir(parca);
+  }
+  for(let i = 0, j = naves2.length; i<j; i++) {
+    naves2[i].susbcribir(parca);
+  }  
+
   const equipo1 = new Equipo(naves1, 0);
   const equipo2 = new Equipo(naves2, 255);
 
   ENTIDADES.push(equipo1);
   ENTIDADES.push(equipo2);
-
-  console.log(MENSAJES)
   
   MENSAJES.agregar("Ya creamos todas las naves");
   MENSAJES.agregar("Let fight!");
