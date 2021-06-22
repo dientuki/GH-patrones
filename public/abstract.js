@@ -3,6 +3,8 @@ class SujetoAbstracto {
     this.vida = 100;
     this.posicion = V(x,y);
     this.eventos = [];
+    this.movedor = movedor;
+    this.arma = arma;
   }
 
   susbcribir(evento) {
@@ -25,7 +27,11 @@ class SujetoAbstracto {
 
   dameVida() {
     return this.vida;
-  }  
+  }
+
+  disparar() {
+    //throw new Error('Falta implementar')
+  };  
 
   mover() {
     this.posicion.x += this.velocidad.x;
@@ -41,6 +47,7 @@ class SujetoAbstracto {
   };
 
   tick() {
+    this.disparar();
     this.mover();
     this.rebotar();
     this.dibujar();    
@@ -48,8 +55,8 @@ class SujetoAbstracto {
 }
 
 class NaveAbstracta extends SujetoAbstracto {
-  constructor(x,y,diametro) {
-    super(x,y)
+  constructor(x,y,diametro, movedor, arma) {
+    super(x,y, movedor, arma)
     this.diametro = diametro;
     this.limite = {
       x: V(CANVAS.x  - this.diametro/2, 0 + this.diametro/2),

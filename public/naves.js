@@ -1,12 +1,11 @@
 class NaveAngosta extends SujetoAbstracto {
   constructor(x,y) {
-    super(x,y)
+    super(x,y, null, null)
     this.velocidad = V(1,2);
     this.alto = 5;
     this.limite = {
       abajo: CANVAS.y - this.alto
     };
-    //this.movedor = movedor;
   }
 
   /*
@@ -70,9 +69,8 @@ class NaveAngosta extends SujetoAbstracto {
 
 class NaveChica extends NaveAbstracta{
   constructor(x,y, movedor) {
-    super(x,y,10)
+    super(x,y,10,movedor)
     this.velocidad = V(2,2);
-    this.movedor = movedor;
   }
 
   mover() {
@@ -117,14 +115,17 @@ class NaveChica extends NaveAbstracta{
 }
 
 class NaveGrande extends NaveAbstracta{
-  constructor(x,y, movedor) {
-    super(x,y,20)
+  constructor(x,y, movedor, arma) {
+    super(x,y,20, movedor, arma)
     this.velocidad = V(1,1);
-    this.movedor = movedor;
   }
 
   mover() {
     this.movedor.mover(this)
+  }
+
+  disparar() {
+    //this.arma.disparar(this)
   }
 
   chocarNaveGrande(objeto){
@@ -167,7 +168,7 @@ class NaveGrande extends NaveAbstracta{
 
 class Equipo extends SujetoAbstracto {
   constructor(naves, color){
-    super(0,0,null);
+    super(0,0,null,null);
     this.naves = naves;
     this.color = color;
   }
@@ -239,5 +240,17 @@ class Equipo extends SujetoAbstracto {
       this.naves[i].tick();
     }
     pop();
+  }
+}
+
+class Bala extends SujetoAbstracto {
+  constructor(x,y,direccion) {
+    super(x,y, new MovedorVertical(), null);
+    this.direccion = direccion.copy().normalize();
+    this.velocidad = this.direccion.copy().mult(4);
+  }
+
+  mover() {
+    this.posicion.add(this.velocidad)
   }
 }
