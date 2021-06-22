@@ -17,8 +17,9 @@ class MovedorEsquivador {
   }
 
   mover(objeto) {
-    for (let i = 0; i< this.enemigos.length; i++) {
-      if (distancia(objeto.posicion, this.enemigos[i] < 30)) {
+    for (let i = 0, l = this.enemigos.length; i < l; i++) {
+      if (distancia(objeto.posicion, this.enemigos[i].posicion) < 30) {
+        //console.log('cambio direccion')
         objeto.velocidad.mult(-1);
       }
     }
