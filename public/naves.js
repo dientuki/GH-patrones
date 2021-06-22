@@ -5,7 +5,8 @@ class NaveAngosta extends SujetoAbstracto {
     this.alto = 5;
     this.limite = {
       abajo: CANVAS.y - this.alto
-    }
+    };
+    //this.movedor = movedor;
   }
 
   /*
@@ -71,14 +72,12 @@ class NaveChica extends NaveAbstracta{
   constructor(x,y, movedor) {
     super(x,y,10)
     this.velocidad = V(2,2);
-    //this.movedor = movedor;
+    this.movedor = movedor;
   }
 
-  /*
   mover() {
     this.movedor.mover(this)
   } 
-  */ 
   
   chocarNaveGrande(objeto){
     let d = distancia(objeto.posicion, this.posicion);
@@ -121,13 +120,12 @@ class NaveGrande extends NaveAbstracta{
   constructor(x,y, movedor) {
     super(x,y,20)
     this.velocidad = V(1,1);
+    this.movedor = movedor;
   }
 
-  /*
   mover() {
     this.movedor.mover(this)
   }
-  */
 
   chocarNaveGrande(objeto){
     let d = distancia(objeto.posicion, this.posicion);

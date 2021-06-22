@@ -8,14 +8,14 @@ function setup() {
   const parca = new Parca(MENSAJES);
 
   for(let i = 0; i<8; i++) {
-    naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
-    naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
-    //naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+    naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5), new MovedorHorizontal()));
+    naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical()));
+    naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
 
-  naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
-  naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
-  //naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+  naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorHorizontal()));
+  naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical()));
+  naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
 
   naves1[rand(0, naves1.length)].susbcribir(new ParcaCapitan(MENSAJES, naves1));
   naves2[rand(0, naves2.length)].susbcribir(new ParcaCapitan(MENSAJES, naves2));
