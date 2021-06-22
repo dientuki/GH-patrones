@@ -25,3 +25,37 @@ class ParcaCapitan extends Observador {
     }    
   }
 }
+
+class GameOver extends Observador {
+    
+  constructor(equipos) {
+      super()
+      this.equipos = equipos
+  }
+
+  actualizar(objeto) {
+    let muertos = 0;
+    
+    for (let i = 0, l1 = this.equipos.length; i < l1; i++) {
+        let naves = this.equipos[i].naves;
+        let termino = true;
+        
+        for (let j = 0, l2 = naves.length; j < l2; j++) {
+            if (naves[j].dameVida() > 0 ) {
+                termino = false
+                break
+            }
+        }
+
+        if (termino) {
+            muertos++
+        }   
+    }
+
+    if (muertos == this.equipos.length - 1) {
+        textSize(32)
+        text('GAME OVER', 100, 200)
+        noLoop()
+    }
+  }
+}

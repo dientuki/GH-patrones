@@ -15,19 +15,20 @@ function setup() {
 
   naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5)));
   naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10)));
-  naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+  //naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
 
-  for(let i = 0, j = naves1.length; i<j; i++) {
-    naves1[i].susbcribir(parca);
-  }
-  for(let i = 0, j = naves2.length; i<j; i++) {
-    naves2[i].susbcribir(parca);
-  }
   naves1[rand(0, naves1.length)].susbcribir(new ParcaCapitan(MENSAJES, naves1));
   naves2[rand(0, naves2.length)].susbcribir(new ParcaCapitan(MENSAJES, naves2));
 
   const equipo1 = new Equipo(naves1, 0);
   const equipo2 = new Equipo(naves2, 255);
+  const gameOver = new GameOver([equipo1, equipo2]);
+
+  equipo1.susbcribir(parca);
+  equipo2.susbcribir(parca);
+
+  equipo1.susbcribir(gameOver);
+  equipo2.susbcribir(gameOver);
 
   ENTIDADES.push(equipo1);
   ENTIDADES.push(equipo2);

@@ -2,7 +2,7 @@ class NaveAngosta extends SujetoAbstracto {
   constructor(x,y) {
     super(x,y)
     this.velocidad = V(1,2);
-    this.alto = 10;
+    this.alto = 5;
     this.limite = {
       abajo: CANVAS.y - this.alto
     }
@@ -171,13 +171,7 @@ class Equipo extends SujetoAbstracto {
   constructor(naves, color){
     super(0,0,null);
     this.naves = naves;
-    this.color = color
-
-    /*
-    for (let i=0; i<this.naves.length; i++) {
-      this.naves[i].susbcribir()
-    }
-    */
+    this.color = color;
   }
 
   dameVida() {
@@ -192,44 +186,50 @@ class Equipo extends SujetoAbstracto {
     return this.naves.length;
   }
 
+  susbcribir(evento){
+    for(let i=0, j = this.naves.length; i<j; i++) {
+      this.naves[i].susbcribir(evento);
+    }
+  }  
+
   chocarNaveChica(objeto){
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].chocar(objeto);
     }
   }
 
   chocarNaveGrande(objeto){
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].chocar(objeto);
     }
   } 
 
   chocarNaveAngosta(objeto){
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].chocar(objeto);
     }
   }   
   
   rebotar(otro) {
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].rebotar(otro);
     }
   }  
 
   chocar(otro) {
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].chocar(otro);
     }
   }
 
   dibujar(otro) {
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].dibujar(otro);
     }
   };  
 
   mover() {
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].mover(otro);
     }
   }
@@ -237,7 +237,7 @@ class Equipo extends SujetoAbstracto {
   tick() {
     push();
     fill(this.color)
-    for(let i=0; i<this.naves.length; i++) {
+    for(let i=0, j = this.naves.length; i<j; i++) {
       this.naves[i].tick();
     }
     pop();
