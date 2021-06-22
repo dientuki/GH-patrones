@@ -10,6 +10,25 @@ class MovedorVertical {
   }
 }
 
+class MovedorRandom {
+  constructor() {
+    this.contador = 0;
+  }
+
+  mover(objeto) {
+    if ((this.contador % 120) == 0 ) {
+      if (rand(0,1) % 2 == 0) {
+        objeto.velocidad.mult(-1);
+      }
+    }
+
+    objeto.posicion.x += objeto.velocidad.x;
+    objeto.posicion.y += objeto.velocidad.y;
+
+    this.contador++;
+  }
+}
+
 class MovedorEsquivador {
   constructor(movedor, enemigos) {
     this.enemigos = enemigos;
