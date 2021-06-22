@@ -8,12 +8,6 @@ class NaveAngosta extends SujetoAbstracto {
     };
   }
 
-  /*
-  mover() {
-    this.movedor.mover(this)
-  }  
-  */
-
   rebotar() {
     if (this.posicion.x > CANVAS.x || this.posicion.x < 0) {
       this.velocidad.x = -this.velocidad.x;
@@ -125,7 +119,7 @@ class NaveGrande extends NaveAbstracta{
   }
 
   disparar() {
-    //this.arma.disparar(this)
+    this.arma.disparar(this)
   }
 
   chocarNaveGrande(objeto){
@@ -160,6 +154,14 @@ class NaveGrande extends NaveAbstracta{
       this.velocidad.mult(-1);      
     }
   }
+
+  chocarBala(objeto) {
+
+  }
+
+  chocar (objeto) {
+    return objeto.chocarBala(this);
+  }  
 
   chocar (objeto) {
     return objeto.chocarNaveGrande(this);
@@ -245,12 +247,45 @@ class Equipo extends SujetoAbstracto {
 
 class Bala extends SujetoAbstracto {
   constructor(x,y,direccion) {
-    super(x,y, new MovedorVertical(), null);
+    super(x,y, null, null);
     this.direccion = direccion.copy().normalize();
     this.velocidad = this.direccion.copy().mult(4);
+    this.diametro = 2;
+    this.limite = {
+      x: V(CANVAS.x  - this.diametro/2, 0 + this.diametro/2),
+      y: V(CANVAS.y - this.diametro/2, 0 + this.diametro/2),
+    }    
   }
 
   mover() {
     this.posicion.add(this.velocidad)
   }
+
+  rebotar() {
+    if (this.posicion.x > this.limite.x.x || this.posicion.x < this.limite.x.y) {
+      this.vida = 0;
+    }
+
+    if (this.posicion.y > this.limite.y.x || this.posicion.y < this.limite.y.y) {
+      this.vida = 0;
+    }
+  }  
+
+  chocarNaveGrande(objeto) {
+
+  }
+
+  chocar (objeto) {
+    return objeto.chocarNaveGrande(this);
+  }
+
+  dibujar () {
+    circle(this.posicion.x, this.posicion.y, this.diametro)
+  }
+  
+  tick() {
+    this.rebotar();
+    this.mover();
+    this.dibujar();    
+  }    
 }
