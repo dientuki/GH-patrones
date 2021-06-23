@@ -29,7 +29,7 @@ function setup() {
 
   const equipo1 = new Equipo(naves1, 0);
   const equipo2 = new Equipo(naves2, 255);
-  const equipo3 = new Equipo(debris, 255);
+  const equipo3 = new Equipo(debris, 120);
 
   const gameOver = new GameOver([equipo1, equipo2]);
 
@@ -59,7 +59,11 @@ function draw() {
         i--;
         l1 = ENTIDADES.length
       }
-    }    
+    }
+
+    while (ENTIDADES[DEBRIS_INDEX].naves.length < 8) {
+      ENTIDADES[DEBRIS_INDEX].naves.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+    }
 
     for(let i = 0, l1 = ENTIDADES.length; i<l1; i++) {
       for(let j = i + 1, l2 = ENTIDADES.length; j<l2; j++) {

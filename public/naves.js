@@ -22,38 +22,47 @@ class NaveAngosta extends SujetoAbstracto {
     line(this.posicion.x, this.posicion.y, this.posicion.x, this.posicion.y + this.alto)
   }  
   
-  chocarNaveGrande(objeto){
-    let d1 = distancia(this.posicion, objeto.posicion);
-    let d2 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto));
-    let d3 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto/2));
-    if (d1 < objeto.diametro/2 || d2 < objeto.diametro/2 || d3 < objeto.diametro/2) {
-      this.sacarVida(VIDAS.NaveGrande);
-      objeto.sacarVida(VIDAS.NaveAngosta);
-      objeto.velocidad.mult(-1)
-      this.velocidad.mult(-1)
-    }    
+  chocarNaveGrande(otro) {
+    let d1 = distancia(otro.posicion, this.posicion)
+    let d2 = distancia(otro.posicion, V(this.posicion.x, this.posicion.y + this.alto))
+    let d3 = distancia(otro.posicion, V(this.posicion.x, this.posicion.y + this.alto/2))
+    if (d1 < otro.diametro/2 || d2 < otro.diametro/2 || d3 < otro.diametro/2) {
+        this.sacarVida(100)
+        otro.sacarVida(12.5)
+        this.velocidad.mult(-1)
+        otro.velocidad.mult(-1)
+    }
   }
-  
-  chocarNaveChica(objeto){
-    let d1 = distancia(this.posicion, objeto.posicion);
-    let d2 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto));
-    let d3 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto/2));
-    if (d1 < objeto.diametro/2 || d2 < objeto.diametro/2 || d3 < objeto.diametro/2) {
-      this.sacarVida(VIDAS.NaveChica);
-      objeto.sacarVida(VIDAS.NaveAngosta);      
-      objeto.velocidad.mult(-1)
-      this.velocidad.mult(-1)
-    }       
+
+  chocarNaveChica(otro){
+      let d1 = distancia(otro.posicion, this.posicion)
+      let d2 = distancia(otro.posicion, V(this.posicion.x, this.posicion.y + this.alto))
+      let d3 = distancia(otro.posicion, V(this.posicion.x, this.posicion.y + this.alto/2))
+      if (d1 < otro.diametro/2 || d2 < otro.diametro/2 || d3 < otro.diametro/2) {
+          this.sacarVida(100)
+          otro.sacarVida(25)
+          this.velocidad.mult(-1)
+          otro.velocidad.mult(-1)
+      }
   }
-  
-  chocarNaveAngosta(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if ( Math.abs( objeto.posicion.x - this.posicion.x ) <= 2 && d < objeto.alto) {
-      this.sacarVida(VIDAS.NaveAngosta);
-      objeto.sacarVida(VIDAS.NaveAngosta);     
-      objeto.velocidad.mult(-1)
-      this.velocidad.mult(-1)
-    }    
+
+  chocarNaveAngosta(otro) {
+      let d = distancia(otro.posicion, this.posicion)
+      if (Math.abs(otro.posicion - this.posicion) <= 2 && d < this.alto) {
+          this.sacarVida(100)
+          otro.sacarVida(100)
+          this.velocidad.mult(-1)
+          otro.velocidad.mult(-1)
+      }
+  }
+
+  chocarBala(bala) {
+      let d = distancia(this.posicion, bala.posicion)
+      //let d2 = distancia(V(this.posicion.x, this.posicion.y + this.alto), bala.posicion)
+      if (d < this.diametro/2) {
+          this.sacarVida(20)
+          bala.sacarVida(bala.dameVida())
+      }
   } 
   
   chocar(objeto) {
@@ -71,47 +80,45 @@ class NaveChica extends NaveAbstracta{
     this.movedor.mover(this)
   } 
 
-  chocarBala(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);     
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }  
-  }  
-  
-  chocarNaveGrande(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.NaveGrande);
-      objeto.sacarVida(VIDAS.NaveChica);            
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }    
+  chocarNaveGrande(otro) {
+    let d = distancia(otro.posicion, this.posicion)
+        if (d < (this.diametro/2 + otro.diametro/2)) {
+            this.sacarVida(100)
+            otro.sacarVida(25)
+            this.velocidad.mult(-1)
+            otro.velocidad.mult(-1)
+        }
   }
-  
-  chocarNaveChica(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.NaveChica);
-      objeto.sacarVida(VIDAS.NaveChica);     
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }  
+
+  chocarNaveChica(otro){
+      let d = distancia(otro.posicion, this.posicion)
+          if (d < (this.diametro)) {
+              this.sacarVida(100)
+              otro.sacarVida(100)
+              this.velocidad.mult(-1)
+              otro.velocidad.mult(-1)
+          }
   }
-  
-  chocarNaveAngosta(objeto){
-    let d1 = distancia(this.posicion, objeto.posicion);
-    let d2 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto));
-    let d3 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto/2));
-    if (d1 < objeto.diametro/2 || d2 < objeto.diametro/2 || d3 < objeto.diametro/2) {
-      this.sacarVida(VIDAS.NaveAngosta);
-      objeto.sacarVida(VIDAS.NaveChica);          
-      objeto.velocidad.mult(-1)
-      this.velocidad.mult(-1)
-    }       
-  }  
+
+  chocarNaveAngosta(otro) {
+      let d1 = distancia(this.posicion, otro.posicion)
+      let d2 = distancia(this.posicion, V(otro.posicion.x, otro.posicion.y + otro.alto))
+      let d3 = distancia(this.posicion, V(otro.posicion.x, otro.posicion.y + otro.alto/2))
+      if (d1 < this.diametro/2 || d2 < this.diametro/2 || d3 < this.diametro/2) {
+          this.sacarVida(25)
+          otro.sacarVida(100)
+          this.velocidad.mult(-1)
+          otro.velocidad.mult(-1)
+      }
+  }
+
+  chocarBala(bala) {
+      let d = distancia(this.posicion, bala.posicion)
+      if (d < this.diametro/2) {
+          this.sacarVida(10)
+          bala.sacarVida(bala.dameVida())
+      }
+  }
   
   chocar (objeto) {
     return objeto.chocarNaveChica(this);
@@ -132,51 +139,48 @@ class NaveGrande extends NaveAbstracta{
     this.arma.disparar(this)
   }
 
-  chocarNaveGrande(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.NaveGrande);
-      objeto.sacarVida(VIDAS.NaveGrande);          
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }
+  chocarNaveGrande(otro) {
+    let d = distancia(otro.posicion, this.posicion)
+        if (d < (this.diametro)) {
+            this.sacarVida(100)
+            otro.sacarVida(100)
+            this.velocidad.mult(-1)
+            otro.velocidad.mult(-1)
+        }
   }
 
-  chocarNaveChica(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.NaveChica);
-      objeto.sacarVida(VIDAS.NaveGrande);          
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }    
+  chocarNaveChica(otro){
+      let d = distancia(otro.posicion, this.posicion)
+          if (d < (this.diametro/2 + otro.diametro/2)) {
+              this.sacarVida(25)
+              otro.sacarVida(100)
+              this.velocidad.mult(-1)
+              otro.velocidad.mult(-1)
+          }
   }
 
-  chocarNaveAngosta(objeto){
-    let d1 = distancia(objeto.posicion, this.posicion);
-    let d2 = distancia(objeto.posicion, V(this.posicion.x, this.posicion.y + this.alto));
-    let d3 = distancia(objeto.posicion, V(this.posicion.x, this.posicion.y + this.alto/2));
-
-    if (d1 < objeto.diametro/2 || d2 < objeto.diametro/2 || d3 < objeto.diametro/2) {
-      this.sacarVida(VIDAS.NaveAngosta);
-      objeto.sacarVida(VIDAS.NaveGrande);       
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);      
-    }
+  chocarNaveAngosta(otro) {
+      let d1 = distancia(this.posicion, otro.posicion)
+      let d2 = distancia(this.posicion, V(otro.posicion.x, otro.posicion.y + otro.alto))
+      let d3 = distancia(this.posicion, V(otro.posicion.x, otro.posicion.y + otro.alto/2))
+      if (d1 < this.diametro/2 || d2 < this.diametro/2 || d3 < this.diametro/2) {
+          this.sacarVida(12.5)
+          otro.sacarVida(100)
+          this.velocidad.mult(-1)
+          otro.velocidad.mult(-1)
+      }
   }
 
-  chocarBala(objeto) {
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    } 
-  }  
+  chocar(otro) {
+      return otro.chocarNaveGrande(this)
+  }
 
-  chocar (objeto) {
-    return objeto.chocarNaveGrande(this);
+  chocarBala(bala) {
+      let d = distancia(this.posicion, bala.posicion)
+      if (d < this.diametro/2) {
+          this.sacarVida(20)
+          bala.sacarVida(bala.dameVida())
+      }
   }
 }
 
@@ -289,50 +293,26 @@ class Bala extends SujetoAbstracto {
     }
   }  
 
-  chocarBala(objeto) {
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }     
+  chocarNaveGrande(sujeto) {
+    return sujeto.chocarBala(this)
   }
 
-  chocarNaveGrande(objeto) {
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }    
+  chocarNaveChica(sujeto) {
+      return sujeto.chocarBala(this)
   }
-  
-  chocarNaveChica(objeto){
-    let d = distancia(objeto.posicion, this.posicion);
-    if (d < objeto.diametro/2 + this.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);     
-      objeto.velocidad.mult(-1);
-      this.velocidad.mult(-1);
-    }  
-  }
-  
-  chocarNaveAngosta(objeto){
-    let d1 = distancia(this.posicion, objeto.posicion);
-    let d2 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto));
-    let d3 = distancia(this.posicion, V(objeto.posicion.x, objeto.posicion.y + objeto.alto/2));
-    if (d1 < objeto.diametro/2 || d2 < objeto.diametro/2 || d3 < objeto.diametro/2) {
-      this.sacarVida(VIDAS.Bala);
-      objeto.sacarVida(VIDAS.Bala);          
-      objeto.velocidad.mult(-1)
-      this.velocidad.mult(-1)
-    }       
-  } 
 
-  chocar (objeto) {
-    return objeto.chocarBala(this);
+  chocarNaveAngosta(sujeto) {
+      return sujeto.chocarBala(this)
+  }
+
+  chocarBala(bala){
+      if (this.posicion.x == bala.posicion.x && this.posicion.y == bala.posicion.y) {
+          this.sacarVida(this.dameVida())
+          bala.sacarVida(this.dameVida())
+      }
+  }
+  chocar(sujeto) {
+      return sujeto.chocarBala(this)
   }
 
   dibujar () {
