@@ -5,33 +5,34 @@ function setup() {
 
   const naves1 = []
   const naves2 = []
+  const debris = [];
   const parca = new Parca(MENSAJES);
 
-  naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical(), new ArmaSnipper(naves1, naves2)));
-  naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical(), new ArmaSnipper(naves2, naves1)));
-
-  /*
   for(let i = 0; i<2; i++) {
-    naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5), new MovedorHorizontal()));
+    naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5), new MovedorHorizontal(), new ArmaSnipper(naves1, naves2)));
     naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical(), new ArmaRandom(naves1)));
-    naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+    //naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
   naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorVertical(), naves1)));
 
   for(let i = 0; i<2; i++) {
-    naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorHorizontal(),new ArmaSnipper(naves1, naves2)));
+    naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorHorizontal(),new ArmaSnipper(naves2, naves1)));
     naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorRandom(), new ArmaRandom(naves1) ));
-    naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+    //naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
   naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorVertical(), naves1)));
-  */
 
+  for(let i = 0; i<8; i++) {
+    debris.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+  }
 
-  //naves1[rand(0, naves1.length)].susbcribir(new ParcaCapitan(MENSAJES, naves1));
-  //naves2[rand(0, naves2.length)].susbcribir(new ParcaCapitan(MENSAJES, naves2));
+  naves1[rand(0, naves1.length)].susbcribir(new ParcaCapitan(MENSAJES, naves1));
+  naves2[rand(0, naves2.length)].susbcribir(new ParcaCapitan(MENSAJES, naves2));
 
   const equipo1 = new Equipo(naves1, 0);
   const equipo2 = new Equipo(naves2, 255);
+  const equipo3 = new Equipo(debris, 255);
+
   const gameOver = new GameOver([equipo1, equipo2]);
 
   equipo1.susbcribir(parca);
@@ -42,6 +43,7 @@ function setup() {
 
   ENTIDADES.push(equipo1);
   ENTIDADES.push(equipo2);
+  ENTIDADES.push(equipo3);
   
   MENSAJES.agregar("Ya creamos todas las naves");
   MENSAJES.agregar("Let fight!");
@@ -73,7 +75,7 @@ function draw() {
       ENTIDADES[i].tick();
     }
 
-    MENSAJES.mostrar()
+    MENSAJES.mostrar();
 
     /*
     textSize(12)
