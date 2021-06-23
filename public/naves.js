@@ -71,14 +71,19 @@ class NaveAngosta extends SujetoAbstracto {
 }
 
 class NaveChica extends NaveAbstracta{
-  constructor(x,y, movedor) {
+  constructor(x,y, movedor, arma) {
     super(x,y,10,movedor)
     this.velocidad = V(2,2);
+    this.arma = arma;
   }
 
   mover() {
     this.movedor.mover(this)
   } 
+
+  disparar() {
+    this.arma.disparar(this)
+  }  
 
   chocarNaveGrande(otro) {
     let d = distancia(otro.posicion, this.posicion)
