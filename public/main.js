@@ -11,16 +11,14 @@ function setup() {
   for(let i = 0; i<2; i++) {
     naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5), new MovedorHorizontal(), new ArmaSnipper(naves1, naves2)));
     naves1.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical(), new ArmaRandom(naves1)));
-    //naves1.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
   }
-  naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorVertical(), naves1)));
+  naves1.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorRandom(), naves1)));
 
   for(let i = 0; i<2; i++) {
     naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorHorizontal(),new ArmaSnipper(naves2, naves1)));
-    naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorRandom(), new ArmaRandom(naves1) ));
-    //naves2.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
+    naves2.push(new NaveGrande( rand(10, CANVAS.x-10), rand(10, CANVAS.y-10),new MovedorVertical(), new ArmaRandom(naves1) ));
   }
-  naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorVertical(), naves1)));
+  naves2.push(new NaveChica( rand(5, CANVAS.x-5), rand(5, CANVAS.y-5),new MovedorEsquivador(new MovedorRandom(), naves1)));
 
   for(let i = 0; i<8; i++) {
     debris.push(new NaveAngosta( rand(0, CANVAS.x), rand(0, CANVAS.y-5)));
