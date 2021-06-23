@@ -156,7 +156,13 @@ class NaveGrande extends NaveAbstracta{
   }
 
   chocarBala(objeto) {
-
+    let d = distancia(objeto.posicion, this.posicion);
+    if (d < objeto.diametro/2 + this.diametro/2) {
+      this.sacarVida(VIDAS.Bala);
+      objeto.sacarVida(VIDAS.Bala);
+      objeto.velocidad.mult(-1);
+      this.velocidad.mult(-1);
+    } 
   }
 
   chocar (objeto) {
@@ -272,7 +278,13 @@ class Bala extends SujetoAbstracto {
   }  
 
   chocarNaveGrande(objeto) {
-
+    let d = distancia(objeto.posicion, this.posicion);
+    if (d < objeto.diametro/2 + this.diametro/2) {
+      this.sacarVida(VIDAS.Bala);
+      objeto.sacarVida(VIDAS.Bala);
+      objeto.velocidad.mult(-1);
+      this.velocidad.mult(-1);
+    }    
   }
 
   chocar (objeto) {

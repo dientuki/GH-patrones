@@ -19,7 +19,7 @@ class ArmaSnipper {
   constructor(entidades, enemigos) {
     this.contador = 0;
     this.entidades = entidades;
-    this.enemigos = enemigos
+    this.enemigos = enemigos;
   }
 
   disparar(shooter) {
